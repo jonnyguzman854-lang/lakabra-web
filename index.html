@@ -3,100 +3,139 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LAKABRA | Prime Rush Hub</title>
-  <meta name="description" content="Hub oficial de LAKABRA: Prime Rush, clips, cuentas, comunidad y colaboraciones." />
+  <title>LAKABRA | Prime Rush Creator</title>
+  <meta name="description" content="Web oficial de LAKABRA: Prime Rush, videos, clips, comunidad y venta de cuentas." />
   <link rel="icon" href="./assets/favicon.svg" />
-  <meta property="og:title" content="LAKABRA | Prime Rush Hub" />
-  <meta property="og:description" content="Videos, clips, comunidad, venta de cuentas y momentos épicos de Prime Rush." />
+  <meta property="og:title" content="LAKABRA | Prime Rush Creator" />
+  <meta property="og:description" content="Videos, clips, comunidad y cuentas de Prime Rush." />
   <meta property="og:image" content="./assets/og-image.jpg" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="boot" id="boot"><div><b>LAKABRA</b><span>PRIME RUSH HUB</span><button id="enterBtn">Entrar</button></div></div>
+  <div class="loader" id="loader"><div class="loader-logo">LAKABRA</div><div class="bar"><span></span></div></div>
   <div class="cursor-glow" id="cursorGlow"></div>
   <canvas id="particles"></canvas>
 
   <header class="nav">
     <a class="brand" href="#inicio"><span>LK</span><strong>LAKABRA</strong></a>
-    <nav><a href="#tv">TV</a><a href="#cuentas">Cuentas</a><a href="#comunidad">Comunidad</a><a href="#contacto">Contacto</a></nav>
-    <div class="nav-actions"><button class="sound" id="soundBtn" title="Sonido">🔇</button><a class="btn btn-primary" href="#follow">Seguir</a></div>
+    <nav>
+      <a href="#videos">Videos</a>
+      <a href="#clips">Clips</a>
+      <a href="#cuentas">Cuentas</a>
+      <a href="#comunidad">Comunidad</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" type="button">ES ▾</button>
+      <div class="lang-menu" id="langMenu">
+        <button data-lang="es">🇪🇸 Español</button>
+        <button data-lang="pt">🇧🇷 Português</button>
+        <button data-lang="en">🇺🇸 English</button>
+      </div>
+      <a class="btn btn-primary" href="#comunidad">Unirme</a>
+    </div>
   </header>
 
   <main>
     <section class="hero" id="inicio">
       <div class="hero-bg"></div>
       <div class="hero-content reveal">
-        <span class="pill"><i></i> CREATOR HUB</span>
+        <span class="pill"><i></i> WEB OFICIAL</span>
         <h1>LAKABRA</h1>
-        <p>Prime Rush, clips reales, cuentas disponibles y comunidad en un solo lugar.</p>
+        <p id="heroText">Prime Rush, clips y comunidad. Entra, mira el contenido, revisa cuentas disponibles y conecta conmigo.</p>
         <div class="actions">
-          <a class="btn btn-youtube" id="youtubeBtn" target="_blank">▶ YouTube</a>
-          <a class="btn btn-dark" id="tiktokBtn" target="_blank">TikTok</a>
+          <a class="btn btn-youtube" id="youtubeBtn" href="https://www.youtube.com/channel/UC5yhMjSb7zw-tE2Nm2wV_NA" target="_blank">▶ YouTube</a>
+          <a class="btn btn-dark" id="tiktokBtn" href="https://www.tiktok.com/@lakabraoficial" target="_blank">TikTok</a>
           <a class="btn btn-green" href="#cuentas">Ver cuentas</a>
-          <a class="btn btn-donate" id="paypalBtn" target="_blank">💙 Donar</a>
+          <a class="btn btn-donate" id="donateBtn" href="https://www.paypal.com/donate/?business=jonnyguzman358%40gmail.com&currency_code=USD" target="_blank">💙 Donar</a>
         </div>
       </div>
       <aside class="profile-card reveal delay">
         <img src="./assets/profile-lakabra.jpg" alt="Foto de perfil de LAKABRA" />
-        <div class="profile-info"><div><h3>LAKABRA</h3><p>Prime Rush Creator</p></div><span>● Online</span></div>
+        <div class="profile-info"><div><h3>LAKABRA</h3><p>Prime Rush Creator</p></div><span>● Activo</span></div>
       </aside>
     </section>
 
-    <section class="follow-gate reveal" id="follow">
-      <div><span class="mini-label">2 segundos</span><h2>Sigue a LAKABRA</h2><p>Elige una red y sigue explorando. Todo queda fácil, sin fatigar al usuario.</p></div>
-      <div class="follow-actions"><a id="followYoutube" target="_blank">YouTube</a><a id="followTiktok" target="_blank">TikTok</a><a id="followDiscord" target="_blank">Discord</a></div>
+    <section class="stats reveal" id="estadisticas">
+      <div><strong id="statVideos">0</strong><span>Videos</span><small>Editable desde Admin</small></div>
+      <div><strong id="statCommunity">0</strong><span>Comunidad</span><small>Seguidores / grupo</small></div>
+      <div><strong id="statHours">126</strong><span>Horas jugadas</span><small>Manual hasta conectar Hub</small></div>
+      <div><strong id="statClips">0</strong><span>Clips épicos</span><small>Videos + TikTok</small></div>
     </section>
 
-    <section class="quick reveal">
-      <a href="#tv"><b>🎬 LAKABRA TV</b><span>Videos y clips</span></a>
-      <a href="#cuentas"><b>🛒 Cuentas</b><span>Prime Rush</span></a>
-      <a href="#comunidad"><b>👥 Comunidad</b><span>Únete</span></a>
-      <a href="#contacto"><b>📩 Contacto</b><span>Colabora</span></a>
-    </section>
-
-    <section class="stats reveal">
-      <div><strong id="statVideos">0</strong><span>Videos</span></div>
-      <div><strong id="statCommunity">0</strong><span>Comunidad</span></div>
-      <div><strong id="statAccounts">0</strong><span>Cuentas</span></div>
-      <div><strong id="statClips">0</strong><span>Clips</span></div>
-    </section>
-
-    <section class="section tv" id="tv">
-      <div class="section-head reveal"><span>Streaming</span><h2>LAKABRA TV</h2><p>Pocos clips, bien presentados. Pasa el mouse para vista previa cuando sea YouTube.</p></div>
+    <section class="section lakabra-tv" id="videos">
+      <div class="section-head reveal"><span>LAKABRA TV</span><h2>Videos destacados</h2><p>Contenido cargado desde el panel. Pega los enlaces exactos y la web abre cada video real.</p></div>
+      <div class="filters reveal" id="contentFilters">
+        <button class="active" data-filter="all">Todo</button>
+        <button data-filter="youtube">YouTube</button>
+        <button data-filter="tiktok">TikTok</button>
+        <button data-filter="shorts">Shorts</button>
+      </div>
+      <div class="sync-status reveal" id="syncStatus">Modo manual desde Admin activado.</div>
       <div class="tv-layout reveal">
-        <article class="featured-player" id="featured"></article>
+        <article class="featured-player" id="featuredPlayer">
+          <div class="video-preview" id="mainPreview">
+            <img src="./assets/hero-banner.jpg" alt="Video destacado"><span class="big-play">▶</span><iframe title="preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+          <div class="featured-meta"><span id="featuredPlatform">YOUTUBE</span><h3 id="featuredTitle">Agrega tus videos desde Admin</h3><p id="featuredDesc">Cuando pegues un enlace de YouTube o TikTok, aparecerá aquí con su miniatura.</p><div class="featured-actions"><a id="openFeatured" class="btn btn-primary" href="https://www.youtube.com/channel/UC5yhMjSb7zw-tE2Nm2wV_NA" target="_blank">Abrir video</a></div></div>
+        </article>
         <div class="playlist" id="playlist"></div>
       </div>
     </section>
 
     <section class="section" id="clips">
-      <div class="section-head reveal"><span>Highlights</span><h2>Clips épicos</h2></div>
-      <div class="clip-row" id="clipRow"></div>
+      <div class="section-head reveal"><span>Highlights</span><h2>Clips destacados</h2><p>Clips tuyos o de seguidores. Se editan desde Admin y se abren con su enlace real.</p></div>
+      <div class="clip-row netflix-row reveal" id="clipRow"></div>
     </section>
 
-    <section class="section accounts" id="cuentas">
-      <div class="section-head reveal"><span>Prime Rush</span><h2>Venta de cuentas</h2><p>Fotos, video, precio y contacto. Todo editable desde Admin.</p></div>
-      <div class="account-grid reveal" id="accountGrid"></div>
+    <section class="section accounts-section" id="cuentas">
+      <div class="section-head reveal"><span>Prime Rush</span><h2>Venta de cuentas Prime Rush</h2><p>El cliente primero revisa fotos y video. El WhatsApp solo se abre cuando presiona comprar.</p></div>
+      <div class="accounts-grid reveal" id="accountsGrid"></div>
     </section>
 
     <section class="section community" id="comunidad">
-      <div class="section-head reveal"><span>Comunidad</span><h2>Únete al equipo LAKABRA</h2><p>Noticias, clips, torneos y avisos rápidos.</p></div>
+      <div class="section-head reveal"><span>Comunidad</span><h2>Únete al equipo LAKABRA</h2><p>Recibe avisos, comparte clips y entra a la comunidad.</p></div>
       <div class="cards reveal">
-        <a class="info-card" id="waBtn" target="_blank"><h3>WhatsApp</h3><p>Avisos rápidos y comunidad.</p></a>
-        <a class="info-card" id="discordBtn" target="_blank"><h3>Discord</h3><p>Servidor oficial o comunidad.</p></a>
-        <a class="info-card" href="#contacto"><h3>Colaboraciones</h3><p>Marcas, torneos y campañas.</p></a>
+        <a class="info-card" id="whatsappLink" href="https://wa.me/" target="_blank"><h3>Grupo WhatsApp</h3><p>Noticias rápidas, avisos y comunidad.</p></a>
+        <a class="info-card pending" id="discordLink" href="#" target="_blank"><h3>Discord</h3><p>Pendiente del enlace oficial.</p></a>
+        <a class="info-card" href="#contacto"><h3>Colaboraciones</h3><p>Contacta para campañas y eventos.</p></a>
       </div>
-      <form class="subscribe reveal" id="subscribeForm"><b>No pierdas la página</b><input id="subEmail" type="email" placeholder="tu correo" required><button class="btn btn-green">Seguir</button></form>
+      <div class="subscribe-card reveal">
+        <div><h3>Lista LAKABRA</h3><p>Déjame tu correo para avisos de videos, cuentas y eventos.</p></div>
+        <form id="subscribeForm"><input id="subscriberInput" type="email" placeholder="tu correo" required><button class="btn btn-green">Suscribirme</button></form>
+        <small id="subscriberCount">0 seguidores registrados</small>
+      </div>
+    </section>
+
+    <section class="section" id="media">
+      <div class="section-head reveal"><span>Profesional</span><h2>Media Kit</h2><p>Información rápida para marcas, torneos y colaboraciones.</p></div>
+      <div class="media-kit reveal">
+        <div><b>Juego principal</b><span>Prime Rush</span></div><div><b>Idioma</b><span>Español / Português / English</span></div><div><b>Contenido</b><span>Gameplay / Clips / Comunidad</span></div><div><b>Donaciones</b><span>PayPal: jonnyguzman358@gmail.com</span></div>
+      </div>
     </section>
 
     <section class="section contact" id="contacto">
       <div class="section-head reveal"><span>Contacto</span><h2>¿Quieres aparecer o colaborar?</h2></div>
-      <form class="contact-form reveal" id="contactForm"><input id="name" placeholder="Tu nombre" required><input id="contact" placeholder="Correo o WhatsApp" required><textarea id="message" placeholder="Mensaje" required></textarea><button class="btn btn-primary">Enviar mensaje</button></form>
+      <form class="contact-form reveal" id="contactForm">
+        <input id="contactName" placeholder="Tu nombre" required>
+        <input id="contactContact" placeholder="Tu correo o WhatsApp" required>
+        <textarea id="contactMessage" placeholder="Escribe tu mensaje" required></textarea>
+        <button class="btn btn-primary">Enviar mensaje</button>
+        <small>El mensaje queda guardado en el panel Admin de este navegador.</small>
+      </form>
     </section>
   </main>
 
-  <a class="floating-whatsapp" id="floatingWhatsapp" target="_blank">WhatsApp</a>
-  <a class="admin-float" href="admin.html">⚙</a>
+  <div class="account-modal" id="accountModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">×</button>
+      <div class="modal-gallery"><img id="modalMainImage" src="./assets/hero-banner.jpg" alt="Cuenta Prime Rush"><div id="modalThumbs"></div></div>
+      <div class="modal-info"><span id="modalStatus" class="platform-pill">Disponible</span><h2 id="modalTitle">Cuenta Prime Rush</h2><strong id="modalPrice"></strong><p id="modalDesc"></p><div id="modalVideoBox"></div><a class="btn btn-green" id="modalContact" href="https://wa.me/" target="_blank">Comprar / Contactar</a></div>
+    </div>
+  </div>
+
+  <a class="floating-whatsapp" id="floatingWhatsapp" href="https://wa.me/" target="_blank">Grupo WhatsApp</a>
+  <a class="admin-float" href="admin.html" title="Admin">⚙</a>
   <footer>© <span id="year"></span> LAKABRA. Todos los derechos reservados.</footer>
   <script src="script.js"></script>
 </body>
