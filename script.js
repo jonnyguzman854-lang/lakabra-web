@@ -1,0 +1,37 @@
+const DEFAULT={
+  links:{youtube:'https://www.youtube.com/channel/UC5yhMjSb7zw-tE2Nm2wV_NA',tiktok:'https://www.tiktok.com/@lakabraoficial',discord:'#',whatsapp:'https://wa.me/',paypal:'https://www.paypal.com/donate/?business=jonnyguzman358%40gmail.com&currency_code=USD'},
+  stats:{videos:0,community:0},
+  videos:[
+    {title:'Video principal de LAKABRA',desc:'Pega el enlace exacto desde Admin.',platform:'youtube',url:'https://www.youtube.com/channel/UC5yhMjSb7zw-tE2Nm2wV_NA',thumb:'./assets/hero-banner.jpg'},
+    {title:'Short destacado',desc:'Agrega tu Short real desde Admin.',platform:'youtube',url:'https://www.youtube.com/channel/UC5yhMjSb7zw-tE2Nm2wV_NA',thumb:'./assets/profile-lakabra.jpg'}
+  ],
+  clips:[
+    {title:'Clutch destacado',platform:'youtube',url:'https://www.youtube.com/channel/UC5yhMjSb7zw-tE2Nm2wV_NA',thumb:'./assets/hero-banner.jpg'},
+    {title:'Clip de seguidor',platform:'tiktok',url:'https://www.tiktok.com/@lakabraoficial',thumb:'./assets/profile-lakabra.jpg'}
+  ],
+  accounts:[
+    {title:'Cuenta Prime Rush',price:'Consultar',desc:'Agrega fotos, video, precio y contacto desde Admin.',contact:'https://wa.me/',media:['./assets/hero-banner.jpg','./assets/profile-lakabra.jpg'],video:''}
+  ]
+};
+function getData(){try{return merge(DEFAULT,JSON.parse(localStorage.getItem('lakabraData')||'{}'))}catch{return DEFAULT}}
+function merge(a,b){const out={...a,...b};out.links={...a.links,...(b.links||{})};out.stats={...a.stats,...(b.stats||{})};return out}
+const data=getData();
+const boot=document.getElementById('boot');enterBtn.onclick=()=>boot.classList.add('hide');setTimeout(()=>boot.classList.add('hide'),3500);
+document.getElementById('year').textContent=new Date().getFullYear();
+const glow=document.getElementById('cursorGlow');addEventListener('mousemove',e=>{if(glow){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'}});
+const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>reveal.observe(el));
+const c=document.getElementById('particles'),ctx=c.getContext('2d');let w,h,parts=[];function resize(){w=c.width=innerWidth;h=c.height=innerHeight;parts=Array.from({length:Math.min(95,Math.floor(w*h/18000))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+1}))}resize();addEventListener('resize',resize);function draw(){ctx.clearRect(0,0,w,h);ctx.fillStyle='rgba(93,220,255,.7)';parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()});ctx.strokeStyle='rgba(93,220,255,.08)';for(let i=0;i<parts.length;i++)for(let j=i+1;j<parts.length;j++){let a=parts[i],b=parts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){ctx.globalAlpha=1-d/130;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.globalAlpha=1}}requestAnimationFrame(draw)}draw();
+function youtubeId(url){if(!url)return'';let m=url.match(/[?&]v=([^&]+)/)||url.match(/youtu\.be\/([^?&]+)/)||url.match(/shorts\/([^?&/]+)/)||url.match(/embed\/([^?&/]+)/);return m?m[1]:''}
+function embed(item){const id=youtubeId(item.url);return item.platform==='youtube'&&id?`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1`:''}
+function thumb(item){const id=youtubeId(item.url);return item.thumb||(id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:'./assets/hero-banner.jpg')}
+function bindLinks(){youtubeBtn.href=data.links.youtube;tiktokBtn.href=data.links.tiktok;paypalBtn.href=data.links.paypal;followYoutube.href=data.links.youtube;followTiktok.href=data.links.tiktok;followDiscord.href=data.links.discord||'#';waBtn.href=data.links.whatsapp;discordBtn.href=data.links.discord||'#';floatingWhatsapp.href=data.links.whatsapp}bindLinks();
+function renderFeatured(item){featured.innerHTML=`<div class="featured-thumb"><img src="${thumb(item)}" alt="${item.title}"><iframe title="preview"></iframe><span class="play">▶</span></div><div class="featured-body"><span class="tag">${item.platform||'video'}</span><h3>${item.title}</h3><p>${item.desc||'Contenido destacado de LAKABRA.'}</p><a class="btn btn-primary" href="${item.url||'#'}" target="_blank">Abrir video</a></div>`;enablePreview(featured,item)}
+function mediaCard(item){const el=document.createElement('article');el.className='media-card';el.innerHTML=`<div class="media-thumb"><img src="${thumb(item)}"><iframe title="preview"></iframe></div><div><span class="tag">${item.platform||'video'}</span><h3>${item.title}</h3><p>${item.desc||''}</p></div>`;el.onclick=()=>item.url&&window.open(item.url,'_blank');enablePreview(el,item);return el}
+function clipCard(item){const el=document.createElement('article');el.className='clip-tile';el.innerHTML=`<img src="${thumb(item)}"><iframe title="preview"></iframe><span class="clip-title">${item.title}</span><span class="play" style="width:54px;height:54px;font-size:20px;left:auto;right:18px;top:18px;transform:none">▶</span>`;el.onclick=()=>item.url&&window.open(item.url,'_blank');enablePreview(el,item);return el}
+function enablePreview(el,item){let t;el.onmouseenter=()=>{const url=embed(item);if(url)t=setTimeout(()=>{el.classList.add('previewing');el.querySelector('iframe').src=url},650)};el.onmouseleave=()=>{clearTimeout(t);el.classList.remove('previewing');const f=el.querySelector('iframe');if(f)f.src=''}}
+function renderTV(){const vids=data.videos||[];renderFeatured(vids[0]||DEFAULT.videos[0]);playlist.innerHTML='';vids.forEach(v=>playlist.appendChild(mediaCard(v)));clipRow.innerHTML='';(data.clips||[]).forEach(c=>clipRow.appendChild(clipCard(c)))}
+function renderAccounts(){accountGrid.innerHTML='';(data.accounts||[]).forEach(acc=>{const media=(acc.media&&acc.media[0])||'./assets/hero-banner.jpg';const card=document.createElement('article');card.className='account-card';card.innerHTML=`<div class="account-gallery">${acc.video?`<video src="${acc.video}" poster="${media}" muted controls></video>`:`<img src="${media}">`}</div><div class="account-body"><h3>${acc.title}</h3><div class="price">${acc.price}</div><p>${acc.desc||''}</p><a class="btn btn-green" href="${acc.contact||data.links.whatsapp}" target="_blank">Comprar / Contactar</a></div>`;accountGrid.appendChild(card)})}
+function renderStats(){statVideos.textContent=(data.stats.videos||data.videos?.length||0);statCommunity.textContent=data.stats.community||0;statAccounts.textContent=(data.accounts||[]).length;statClips.textContent=(data.clips||[]).length}renderTV();renderAccounts();renderStats();
+subscribeForm.onsubmit=e=>{e.preventDefault();const list=JSON.parse(localStorage.getItem('lakabraSubscribers')||'[]');if(subEmail.value&&!list.includes(subEmail.value))list.push(subEmail.value);localStorage.setItem('lakabraSubscribers',JSON.stringify(list));subEmail.value='';alert('Listo, quedaste registrado en esta web.')};
+contactForm.onsubmit=e=>{e.preventDefault();const arr=JSON.parse(localStorage.getItem('lakabraMessages')||'[]');arr.unshift({date:new Date().toLocaleString(),name:name.value,contact:contact.value,message:message.value});localStorage.setItem('lakabraMessages',JSON.stringify(arr));contactForm.reset();alert('Mensaje guardado. En producción lo conectamos a correo/base de datos.')};
+let audioOn=false;soundBtn.onclick=()=>{audioOn=!audioOn;soundBtn.textContent=audioOn?'🔊':'🔇'};
