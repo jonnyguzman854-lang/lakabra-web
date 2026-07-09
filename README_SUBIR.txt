@@ -1,24 +1,28 @@
-LAKABRA WEB - FINAL ESTABLE
+LAKABRA WEB - VERSIÓN FINAL ESTABLE
 
-Sube todo este contenido a GitHub:
+Sube TODO el contenido de esta carpeta a GitHub.
+
+Incluye:
 - index.html
 - style.css
 - script.js
-- admin.html
 - 404.html
 - robots.txt
 - sitemap.xml
 - site.webmanifest
 - assets/
+- lk-control-7f29/  (panel privado)
 
-Cambios incluidos:
-- Videos y clips por enlaces manuales desde Admin.
-- Venta de cuentas Prime Rush con galería antes de WhatsApp.
-- Varias fotos por cuenta, video, precio, rango, nivel y contacto.
-- Optimización móvil con menú inferior.
-- Sin API Key obligatoria.
+Panel privado:
+https://TU-DOMINIO/lk-control-7f29/
 
-Admin demo:
-Usuario: lakabra
-Clave: 1234
-Moderador: mod / 2026
+Usuario admin: lakabra
+Clave admin: 1234
+Usuario mod: mod
+Clave mod: 2026
+
+Importante:
+- El botón de administrador ya no aparece para usuarios normales.
+- /admin.html ahora muestra 404 para que nadie vea el panel.
+- La tienda muestra 3 cuentas por fila en PC, 2 en tablet y 1 en celular.
+- Las cuentas, videos, clips y enlaces se editan desde el panel privado.
