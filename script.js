@@ -10,10 +10,10 @@ async function loadSettings(){
     return {...DEFAULT};
   }
 }
-async function init(){settings=await loadSettings();startApp()}
+async function init(){try{settings=await loadSettings()}catch(error){console.error(error);settings={...DEFAULT}}finally{startApp()}}
 function startApp(){
 
-const loader=document.getElementById('loader');window.addEventListener('load',()=>setTimeout(()=>loader?.classList.add('hide'),650));document.getElementById('year').textContent=new Date().getFullYear();
+const loader=document.getElementById('loader');setTimeout(()=>loader?.classList.add('hide'),650);document.getElementById('year').textContent=new Date().getFullYear();
 const glow=document.getElementById('cursorGlow');window.addEventListener('mousemove',e=>{if(glow){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'}});
 const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>reveal.observe(el));
 const c=document.getElementById('particles'),ctx=c.getContext('2d');let w,h,parts=[];function resize(){w=c.width=innerWidth;h=c.height=innerHeight;parts=Array.from({length:Math.min(95,Math.floor(w*h/18000))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+1}))}resize();addEventListener('resize',resize);function draw(){ctx.clearRect(0,0,w,h);ctx.fillStyle='rgba(93,220,255,.7)';parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()});ctx.strokeStyle='rgba(93,220,255,.08)';for(let i=0;i<parts.length;i++)for(let j=i+1;j<parts.length;j++){let a=parts[i],b=parts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){ctx.globalAlpha=1-d/130;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.globalAlpha=1}}requestAnimationFrame(draw)}draw();
