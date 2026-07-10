@@ -38,8 +38,30 @@ function youtubeId(url = '') {
   return '';
 }
 
-function youtubeThumb(id, quality = 'hqdefault') {
+function youtubeThumb(id, quality = 'maxresdefault') {
   return id ? `https://i.ytimg.com/vi/${id}/${quality}.jpg` : '/assets/hero-banner.jpg';
+}
+
+function thumbnailCandidates(id) {
+  if (!id) return ['/assets/hero-banner.jpg'];
+  return [
+    youtubeThumb(id, 'maxresdefault'),
+    youtubeThumb(id, 'sddefault'),
+    youtubeThumb(id, 'hqdefault'),
+    youtubeThumb(id, 'mqdefault'),
+    youtubeThumb(id, 'default')
+  ];
+}
+
+function applyThumbnailFallback(img, id, finalFallback = '/assets/hero-banner.jpg') {
+  if (!img) return;
+  const candidates = thumbnailCandidates(id);
+  let index = Math.max(0, candidates.indexOf(img.getAttribute('src')));
+  img.onerror = () => {
+    index += 1;
+    if (index < candidates.length) img.src = candidates[index];
+    else { img.onerror = null; img.src = finalFallback; }
+  };
 }
 
 function isPlaceholderThumb(thumb = '') {
@@ -49,7 +71,7 @@ function isPlaceholderThumb(thumb = '') {
 function embedUrl(item) {
   const id = item.videoId || youtubeId(item.url);
   return item.platform === 'youtube' && id
-    ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${id}`
+    ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${id}&modestbranding=1&iv_load_policy=3`
     : '';
 }
 
@@ -70,7 +92,7 @@ async function normalize(item, kind = 'youtube') {
   let thumb = item.thumb || '';
 
   // YouTube siempre usa la miniatura real cuando la miniatura está vacía o es una imagen demo.
-  if (platform === 'youtube' && id && isPlaceholderThumb(thumb)) thumb = youtubeThumb(id, 'hqdefault');
+  if (platform === 'youtube' && id && isPlaceholderThumb(thumb)) thumb = youtubeThumb(id, 'maxresdefault');
   if (platform === 'tiktok' && item.url && isPlaceholderThumb(thumb)) thumb = await tiktokThumbnail(item.url) || '/assets/profile-lakabra.jpg';
   if (!thumb) thumb = '/assets/hero-banner.jpg';
 
@@ -184,14 +206,18 @@ function previewController(card, item, iframe) {
     if (!isDesktopHover()) return;
     const embed = embedUrl(item);
     if (!embed) return;
+    card.classList.add('preview-loading');
     timer = setTimeout(() => {
-      card.classList.add('previewing');
+      iframe.onload = () => card.classList.remove('preview-loading');
       iframe.src = embed;
-    }, 450);
+      card.classList.add('previewing');
+      setTimeout(() => card.classList.remove('preview-loading'), 2200);
+    }, 420);
   };
   const stop = () => {
     clearTimeout(timer);
-    card.classList.remove('previewing');
+    card.classList.remove('previewing', 'preview-loading');
+    iframe.onload = null;
     iframe.src = '';
   };
   card.addEventListener('mouseenter', start);
@@ -217,6 +243,7 @@ function mediaCard(item, onFeature) {
       <div class="media-meta">${esc(item.published)}</div>
     </div>`;
   const iframe = card.querySelector('iframe');
+  applyThumbnailFallback(card.querySelector('img'), item.videoId || youtubeId(item.url));
   previewController(card, item, iframe);
   card.addEventListener('mouseenter', () => onFeature(item));
   card.onclick = () => item.url && window.open(item.url, '_blank', 'noopener');
@@ -235,6 +262,7 @@ function clipCard(item) {
     <span class="clip-title">${esc(item.title)}</span>
     <span class="card-play">▶</span>
     <iframe title="Vista previa de ${esc(item.title)}" allow="autoplay; encrypted-media" loading="lazy"></iframe>`;
+  applyThumbnailFallback(card.querySelector('img'), item.videoId || youtubeId(item.url), '/assets/profile-lakabra.jpg');
   previewController(card, item, card.querySelector('iframe'));
   card.onclick = () => item.url && window.open(item.url, '_blank', 'noopener');
   card.onkeydown = e => { if (e.key === 'Enter') card.click(); };
@@ -267,7 +295,9 @@ async function initMedia() {
     $('featuredDesc').textContent = item.desc || 'Contenido oficial de LAKABRA';
     $('openFeatured').href = item.url || settings.youtube;
     preview.classList.remove('previewing');
-    preview.querySelector('img').src = item.thumb;
+    const featuredImage = preview.querySelector('img');
+    featuredImage.src = item.thumb;
+    applyThumbnailFallback(featuredImage, item.videoId || youtubeId(item.url));
     preview.querySelector('iframe').src = '';
     preview.dataset.embed = embedUrl(item);
   };

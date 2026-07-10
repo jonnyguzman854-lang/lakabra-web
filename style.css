@@ -29,3 +29,12 @@
 @media(max-width:1180px){.tv-layout{grid-template-columns:1fr}.playlist{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none}.netflix-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:780px){.cursor-glow{display:none}.hero{padding-top:112px}.hero h1{font-size:clamp(58px,20vw,94px)}.profile-card{height:330px}.tv-layout{display:block}.featured-player{padding:10px}.video-preview,.video-preview img{height:auto;aspect-ratio:16/9;min-height:0}.featured-meta h3{font-size:25px}.playlist{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 2px}.media-item{min-width:82vw;grid-template-columns:122px 1fr;scroll-snap-align:start}.media-thumb{height:76px}.netflix-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:3px 2px 12px}.clip-tile{min-width:78vw;scroll-snap-align:start}.big-play{width:66px;height:66px;font-size:24px}.clip-tile iframe,.media-item iframe{display:none!important}.section{margin-bottom:58px}.section-head p{font-size:14px}.floating-whatsapp{bottom:80px}.nav{height:64px}.brand span{width:40px;height:40px}.brand strong{font-size:15px}.stats{gap:10px}.stats strong{font-size:35px}}
 @media(max-width:480px){.playlist .media-item{min-width:90vw}.clip-tile{min-width:86vw}.actions{gap:9px}.btn{min-height:48px;padding:0 18px}.stats div{padding:16px}.stats small{font-size:11px}.nav-actions{gap:6px}.lang-btn{min-height:40px;padding:0 10px}}
+
+/* V3: miniaturas robustas y preview estilo Netflix */
+.media-thumb::after,.video-preview::after,.clip-tile::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:.2s;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%)}
+.preview-loading .media-thumb::after,.video-preview.preview-loading::after,.clip-tile.preview-loading::after{opacity:1;animation:previewShimmer 1s linear infinite}
+@keyframes previewShimmer{to{transform:translateX(100%)}}
+.media-thumb iframe,.video-preview iframe,.clip-tile iframe{z-index:5;background:#000;pointer-events:none}
+.media-item.previewing .card-play,.clip-tile.previewing .card-play,.clip-tile.previewing .platform-pill,.clip-tile.previewing .clip-title,.clip-tile.previewing .clip-overlay{opacity:0}
+.media-item.previewing,.clip-tile.previewing,.video-preview.previewing{box-shadow:0 22px 70px rgba(0,0,0,.48),0 0 0 1px rgba(93,220,255,.25)}
+.media-thumb img,.clip-tile>img,.video-preview>img{background:linear-gradient(135deg,#071220,#101a2d)}
