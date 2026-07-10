@@ -1,0 +1,18 @@
+LAKABRA PREMIUM 2026
+
+MEJORAS INCLUIDAS
+- Miniatura automática para enlaces de YouTube.
+- Vista previa automática sin sonido al pasar el mouse (solo computadoras con mouse).
+- Diseño de videos más compacto, profesional y estilo plataforma de streaming.
+- Más clips visibles por fila y carrusel optimizado en móvil.
+- Logo LK animado con brillo elegante.
+- Panel LAKABRA CONTROL completamente rediseñado en morado + dorado, humo y partículas.
+- Panel adaptable a celular con menú lateral móvil.
+- Autenticación y guardado mediante Supabase.
+
+PARA PUBLICAR
+Sube todos los archivos de esta carpeta a la rama principal de GitHub y reemplaza los anteriores.
+Vercel desplegará automáticamente. No vuelvas a ejecutar SUPABASE_SETUP.sql.
+
+NOTA TIKTOK
+YouTube ofrece miniaturas automáticas de forma estable. TikTok puede limitar la obtención automática de portada desde el navegador; por eso el panel conserva el campo opcional de miniatura para TikTok.
