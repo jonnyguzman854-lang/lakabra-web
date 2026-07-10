@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LAKABRA | Prime Rush Creator</title>
   <meta name="description" content="Web oficial de LAKABRA: Prime Rush, videos, clips, comunidad y venta de cuentas." />
-  <link rel="icon" href="./assets/favicon.svg" />
+  <link rel="icon" href="/assets/favicon.svg" />
   <meta property="og:title" content="LAKABRA | Prime Rush Creator" />
   <meta property="og:description" content="Videos, clips, comunidad y cuentas de Prime Rush." />
-  <meta property="og:image" content="./assets/og-image.jpg" />
+  <meta property="og:image" content="/assets/og-image.jpg" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <aside class="profile-card reveal delay">
-        <img src="./assets/profile-lakabra.jpg" alt="Foto de perfil de LAKABRA" />
+        <img src="/assets/profile-lakabra.jpg" alt="Foto de perfil de LAKABRA" />
         <div class="profile-info"><div><h3>LAKABRA</h3><p>Prime Rush Creator</p></div><span>● Activo</span></div>
       </aside>
     </section>
@@ -75,7 +75,7 @@
       <div class="tv-layout reveal">
         <article class="featured-player" id="featuredPlayer">
           <div class="video-preview" id="mainPreview">
-            <img src="./assets/hero-banner.jpg" alt="Video destacado"><span class="big-play">▶</span><iframe title="preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <img src="/assets/hero-banner.jpg" alt="Video destacado"><span class="big-play">▶</span><iframe title="preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
           <div class="featured-meta"><span id="featuredPlatform">YOUTUBE</span><h3 id="featuredTitle">Agrega tus videos desde Admin</h3><p id="featuredDesc">Cuando pegues un enlace de YouTube o TikTok, aparecerá aquí con su miniatura.</p><div class="featured-actions"><a id="openFeatured" class="btn btn-primary" href="https://www.youtube.com/channel/UC5yhMjSb7zw-tE2Nm2wV_NA" target="_blank">Abrir video</a></div></div>
         </article>
@@ -129,13 +129,15 @@
   <div class="account-modal" id="accountModal" aria-hidden="true">
     <div class="modal-card">
       <button class="modal-close" id="modalClose">×</button>
-      <div class="modal-gallery"><img id="modalMainImage" src="./assets/hero-banner.jpg" alt="Cuenta Prime Rush"><div id="modalThumbs"></div></div>
+      <div class="modal-gallery"><img id="modalMainImage" src="/assets/hero-banner.jpg" alt="Cuenta Prime Rush"><div id="modalThumbs"></div></div>
       <div class="modal-info"><span id="modalStatus" class="platform-pill">Disponible</span><h2 id="modalTitle">Cuenta Prime Rush</h2><strong id="modalPrice"></strong><p id="modalDesc"></p><div id="modalVideoBox"></div><a class="btn btn-green" id="modalContact" href="https://wa.me/" target="_blank">Comprar / Contactar</a></div>
     </div>
   </div>
 
   <a class="floating-whatsapp" id="floatingWhatsapp" href="https://wa.me/" target="_blank">Grupo WhatsApp</a>
   <footer>© <span id="year"></span> LAKABRA. Todos los derechos reservados.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

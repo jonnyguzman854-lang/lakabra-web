@@ -1,0 +1,18 @@
+LAKABRA + SUPABASE — PASOS FINALES
+
+1) En Supabase abre: SQL Editor > New query.
+2) Abre el archivo SUPABASE_SETUP.sql, copia todo, pégalo y pulsa Run.
+3) En Supabase abre: Authentication > Users > Add user.
+4) Crea tu usuario administrador con tu correo y una contraseña segura.
+5) Sube TODO el contenido de esta carpeta a tu repositorio de GitHub, reemplazando los archivos anteriores.
+6) Vercel hará un despliegue automático. Espera a que termine.
+7) Abre el panel privado:
+   https://TU-DOMINIO/lk-control-7f29/
+8) Entra con el correo y la contraseña creados en Supabase Authentication.
+9) Agrega un video o clip y pulsa Guardar. Luego recarga la página pública para comprobarlo.
+
+IMPORTANTE
+- No compartas ninguna clave service_role o secret.
+- La clave publicable incluida en config.js sí está diseñada para el navegador.
+- El panel ya no usa los usuarios antiguos lakabra/1234 ni mod/2026.
+- Las imágenes principales ya están incluidas en la carpeta assets.
